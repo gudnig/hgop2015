@@ -8,4 +8,4 @@ docker push gudnig/tictactoe
 
 echo Connecting to prod
 
-ssh vagrant@192.168.33.11
+ssh vagrant@192.168.33.11 'bash -s' < deployImage.sh
