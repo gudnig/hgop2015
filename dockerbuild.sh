@@ -1,4 +1,7 @@
 #!/bin/bash
+set -e
+
+sudo service docker start
 
 echo Cleaning...
 rm -rf ./dist

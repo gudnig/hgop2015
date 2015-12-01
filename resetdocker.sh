@@ -1,3 +1,5 @@
+#!/bin/bash
+set -e
 docker kill yoserver
 docker rm yoserver
 docker pull gudnig/tictactoe
