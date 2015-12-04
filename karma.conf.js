@@ -80,8 +80,8 @@ module.exports = function(config) {
 
     // the default configuration
     junitReporter: {
-
-      outputFile: outputFile: 'tests_out/junit/test-results.xml', // if included, results will be saved as $outputDir/$browserName/$outputFile
+      outputDir: '', // results will be saved as $outputDir/$browserName.xml
+      outputFile: 'test-results.xml', // if included, results will be saved as $outputDir/$browserName/$outputFile
       suite: '', // suite will become the package name attribute in xml testsuite element
       useBrowserName: true // add browser name to report and classes names
     }
