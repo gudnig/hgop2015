@@ -70,8 +70,8 @@ module.exports = function (grunt) {
         tasks: ['injector:css']
       },
       mochaTest: {
-        files: ['server/**/*.spec.js'],
-        tasks: ['env:test', 'mochaTest']
+        files: ['server/**/*.js'],
+        tasks: ['env:test', 'mochaTest:test']
       },
       jsTest: {
         files: [
@@ -404,10 +404,10 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
-        'less',
+        'less'
       ],
       test: [
-        'less',
+        'less'
       ],
       debug: {
         tasks: [
@@ -434,12 +434,21 @@ module.exports = function (grunt) {
     },
 
     mochaTest: {
-      options: {
-        reporter: 'spec'
+      test:{
+        options: {
+          reporter: process.env.MOCHA_REPORTER || 'spec',
+          captureFile:'server-tests'
+        },
+        src: ['server/**/*.spec.js']
       },
-      src: ['server/**/*.spec.js']
+      acceptance: {
+        options: {
+          reporter: process.env.MOCHA_REPORTER || 'spec',
+          captureFile:'acceptance-tests'
+        },
+        src: ['server/**/*.acceptance.js']
+      }
     },
-
     protractor: {
       options: {
         configFile: 'protractor.conf.js'
@@ -476,7 +485,7 @@ module.exports = function (grunt) {
         files: {
           '.tmp/app/app.css' : '<%= yeoman.client %>/app/app.less'
         }
-      },
+      }
     },
 
     injector: {
@@ -496,11 +505,11 @@ module.exports = function (grunt) {
         },
         files: {
           '<%= yeoman.client %>/index.html': [
-              ['{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js',
-               '!{.tmp,<%= yeoman.client %>}/app/app.js',
-               '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.spec.js',
-               '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js']
-            ]
+            ['{.tmp,<%= yeoman.client %>}/{app,components}/**/*.js',
+              '!{.tmp,<%= yeoman.client %>}/app/app.js',
+              '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.spec.js',
+              '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js']
+          ]
         }
       },
 
@@ -540,7 +549,7 @@ module.exports = function (grunt) {
           ]
         }
       }
-    },
+    }
   });
 
   // Used for delaying livereload until after server has restarted
@@ -601,10 +610,16 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'env:all',
         'env:test',
-        'mochaTest'
+        'mochaTest:test'
       ]);
     }
-
+    else if (target === 'acceptance') {
+      return grunt.task.run([
+        'env:all',
+        'env:test',
+        'mochaTest:acceptance'
+      ]);
+    }
     else if (target === 'client') {
       return grunt.task.run([
         'clean:server',
@@ -633,9 +648,9 @@ module.exports = function (grunt) {
     }
 
     else grunt.task.run([
-      'test:server',
-      'test:client'
-    ]);
+        'test:server',
+        'test:client'
+      ]);
   });
 
   grunt.registerTask('build', [
