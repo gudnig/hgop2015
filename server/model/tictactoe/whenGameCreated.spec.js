@@ -1,4 +1,16 @@
-
+function tictactoeCommandHandler(given) {
+  return {
+    executeCommand: function() {
+      return [{
+        cid: "123",
+        event: "GameCreated",
+        user: "gudnig",
+        name: "test game",
+        time: "2015.12.06T15:30:55"
+      }]
+    }
+  };
+}
 
 describe('create game command', function() {
   var given, when, then;
@@ -13,12 +25,13 @@ describe('create game command', function() {
       time: "2015.12.06T15:30:55"
     };
     then =[{
-      id: "123",
+      cid: "123",
       event: "GameCreated",
       user: "gudnig",
       name: "test game",
       time: "2015.12.06T15:30:55"
     }];
+
     var result = tictactoeCommandHandler(given).executeCommand(when);
 
     JSON.stringify(result).should.be.exactly(JSON.stringify(then));
