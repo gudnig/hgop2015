@@ -61,7 +61,7 @@ describe('place command', function() {
       row: 1,
       column: 1,
       time: "2015.12.06T21:05:55"
-    }
+    };
 
     then = [{
       cid: "147",
@@ -71,7 +71,43 @@ describe('place command', function() {
       row: 1,
       column: 1,
       time: "2015.12.06T21:05:55"
-    }]
+    }];
+
+    var result = tictactoeCommandHandler(given).executeCommand(when);
+
+    JSON.stringify(result).should.be.exactly(JSON.stringify(then));
+
+  });
+
+  it('should reject placement on occupied square', function() {
+    given.push({
+      cid: "19",
+      event: "Placed",
+      user:"gudni",
+      symbol: "X",
+      row: 1,
+      column: 1,
+      time: "2015.12.06T21:05:47"
+    });
+    when = {
+      cid: "166",
+      command: "Place",
+      user: "gretar",
+      symbol: "O",
+      row: 1,
+      column: 1,
+      time: "2015.12.06T21:06:55"
+    };
+
+    then = [{
+      cid: "166",
+      event: "IllegalMove",
+      user: "gretar",
+      symbol: "O",
+      row: 1,
+      column: 1,
+      time: "2015.12.06T21:06:55"
+    }];
 
     var result = tictactoeCommandHandler(given).executeCommand(when);
 
