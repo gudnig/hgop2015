@@ -43,4 +43,39 @@ describe('place command', function() {
 
     JSON.stringify(result).should.be.exactly(JSON.stringify(then));
   });
+  it('should place symbol on empty slot on non-empty board', function() {
+    given.push({
+      cid: "15",
+      event: "Placed",
+      user:"gudni",
+      symbol: "X",
+      row: 0,
+      column: 2,
+      time: "2015.12.06T21:05:50"
+    });
+    when = {
+      cid: "147",
+      command: "Place",
+      user: "gretar",
+      symbol: "O",
+      row: 1,
+      column: 1,
+      time: "2015.12.06T21:05:55"
+    }
+
+    then = [{
+      cid: "147",
+      event: "Placed",
+      user: "gretar",
+      symbol: "O",
+      row: 1,
+      column: 1,
+      time: "2015.12.06T21:05:55"
+    }]
+
+    var result = tictactoeCommandHandler(given).executeCommand(when);
+
+    JSON.stringify(result).should.be.exactly(JSON.stringify(then));
+
+  });
 });
