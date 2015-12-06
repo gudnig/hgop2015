@@ -7,7 +7,7 @@ describe('create game command', function() {
     given = [];
     when = {
       cid: "123",
-      command: "GreateGame",
+      command: "CreateGame",
       user: "gudnig",
       name: "test game",
       time: "2015.12.06T15:30:55"
@@ -29,7 +29,7 @@ describe('create game command', function() {
     given = [];
     when = {
       cid: "34",
-      command: "GreateGame",
+      command: "CreateGame",
       user: "hermanToothrot",
       name: "real game",
       time: "2015.12.06T15:45:12"
