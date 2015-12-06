@@ -1,3 +1,19 @@
+Create game
+
+Given []
+When [CreateGame]
+Then [GameCreated]
+
+Join game
+
+Given []
+When [JoinGame]
+Then [NoGameToJoin]
+
+Given [GameCreated]
+When [JoinGame]
+Then [GameJoined]
+
 Legal scenarios
 
 Given [ Placed(0,0,X) ]
