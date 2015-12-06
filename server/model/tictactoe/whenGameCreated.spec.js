@@ -1,12 +1,12 @@
 function tictactoeCommandHandler(given) {
   return {
-    executeCommand: function() {
+    executeCommand: function(command) {
       return [{
-        cid: "123",
+        cid: command.cid,
         event: "GameCreated",
-        user: "gudnig",
-        name: "test game",
-        time: "2015.12.06T15:30:55"
+        user: command.user,
+        name: command.name,
+        time: command.time
       }]
     }
   };
