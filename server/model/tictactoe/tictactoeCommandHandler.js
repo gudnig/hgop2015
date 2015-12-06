@@ -1,13 +1,27 @@
-module.exports = function tictactoeCommandHandler(given) {
+module.exports = function tictactoeCommandHandler(events) {
+  var gameCreatedEvent = events[0];
+
   return {
     executeCommand: function(command) {
-      return [{
-        cid: command.cid,
-        event: "GameCreated",
-        user: command.user,
-        name: command.name,
-        time: command.time
-      }]
+      if(command.command === "CreateGame") {
+        return [{
+          cid: command.cid,
+          event: "GameCreated",
+          user: command.user,
+          name: command.name,
+          time: command.time
+        }]
+      }
+      else if(command.command === "JoinGame") {
+        return [{
+          cid: command.cid,
+          event: "GameJoined",
+          user: command.user,
+          name: command.name,
+          hostingUser: gameCreatedEvent.user,
+          time: command.time
+        }]
+      }
     }
   };
 };
