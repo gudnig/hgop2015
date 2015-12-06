@@ -31,6 +31,17 @@ module.exports = function tictactoeCommandHandler(events) {
           time: command.time
         }]
       }
+      else if(command.command === "Place") {
+        return [{
+          cid: command.cid,
+          event: "Placed",
+          user: command.user,
+          symbol: command.symbol,
+          row: command.row,
+          column: command.column,
+          time: command.time
+        }]
+      }
     }
   };
 };
