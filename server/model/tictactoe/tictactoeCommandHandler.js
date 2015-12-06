@@ -13,6 +13,15 @@ module.exports = function tictactoeCommandHandler(events) {
         }]
       }
       else if(command.command === "JoinGame") {
+        if(gameCreatedEvent === undefined) {
+          return [{
+            cid: command.cid,
+            event: "NoSuchGame",
+            user: command.user,
+            name: command.name,
+            time: command.time
+          }]
+        }
         return [{
           cid: command.cid,
           event: "GameJoined",
