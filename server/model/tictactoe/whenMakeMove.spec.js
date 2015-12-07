@@ -372,4 +372,115 @@ describe('place command', function() {
     JSON.stringify(result).should.be.exactly(JSON.stringify(then));
   });
 
+  it('draw when the board is full and no victory has been achieved', function() {
+    given = [{
+      cid: "12",
+      event: "GameCreated",
+      user: "gudni",
+      name: "gudni's game",
+      time: "2015.12.06T21:00:01"
+    }, {
+      cid: "144",
+      event: "GameJoined",
+      user: "gretar",
+      name: "gudni's game",
+      hostingUser: "gudni",
+      time:"2015.12.06T21:03:02"
+    }, {
+      cid: "13",
+      event: "Placed",
+      user:"gudni",
+      symbol: "X",
+      row: 1,
+      column: 1,
+      time: "2015.12.06T21:03:17"
+    }, {
+      cid: "145",
+      event: "Placed",
+      user:"gretar",
+      symbol: "O",
+      row: 2,
+      column: 2,
+      time: "2015.12.06T21:03:32"
+    }, {
+      cid: "14",
+      event: "Placed",
+      user:"gudni",
+      symbol: "X",
+      row: 0,
+      column: 0,
+      time: "2015.12.06T21:03:47"
+    }, {
+      cid: "146",
+      event: "Placed",
+      user:"gretar",
+      symbol: "O",
+      row: 2,
+      column: 0,
+      time: "2015.12.06T21:04:00"
+    }, {
+      cid: "15",
+      event: "Placed",
+      user:"gudni",
+      symbol: "X",
+      row: 2,
+      column: 1,
+      time: "2015.12.06T21:04:15"
+    }, {
+      cid: "147",
+      event: "Placed",
+      user:"gretar",
+      symbol: "O",
+      row: 0,
+      column: 1,
+      time: "2015.12.06T21:04:30"
+    }, {
+      cid: "16",
+      event: "Placed",
+      user:"gudni",
+      symbol: "X",
+      row: 1,
+      column: 2,
+      time: "2015.12.06T21:04:45"
+    }, {
+      cid: "148",
+      event: "Placed",
+      user:"gretar",
+      symbol: "O",
+      row: 1,
+      column: 0,
+      time: "2015.12.06T21:05:00"
+    }];
+
+    when = {
+      cid: "17",
+      command: "Place",
+      user: "gudni",
+      symbol: "X",
+      row: 0,
+      column: 2,
+      time: "2015.12.06T21:05:15"
+    };
+
+    then = [{
+      cid: "17",
+      event: "Placed",
+      user: "gudni",
+      symbol: "X",
+      row: 0,
+      column: 2,
+      time: "2015.12.06T21:05:15"
+    }, {
+      cid: "17",
+      event: "Draw",
+      time: "2015.12.06T21:07:48"
+    }];
+
+    var result = tictactoeCommandHandler(given).executeCommand(when);
+
+    JSON.stringify(result).should.be.exactly(JSON.stringify(then));
+  });
+
 });
+
+
