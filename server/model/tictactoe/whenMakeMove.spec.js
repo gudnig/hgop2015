@@ -163,4 +163,56 @@ describe('place command', function() {
 
     JSON.stringify(result).should.be.exactly(JSON.stringify(then));
   });
+
+  it('should return win event on 3 in a row victory', function() {
+
+    given.concat([{
+      cid: "28",
+      event: "Placed",
+      user:"gudni",
+      symbol: "X",
+      row: 0,
+      column: 0,
+      time: "2015.12.06T21:05:59"
+    }, {
+      cid: "29",
+      event: "Placed",
+      user:"gudni",
+      symbol: "X",
+      row: 0,
+      column: 1,
+      time: "2015.12.06T21:06:07"
+    }]);
+
+    when = {
+      cid: "29",
+      command: "Place",
+      user: "gudni",
+      symbol: "X",
+      row: 0,
+      column: 2,
+      time: "2015.12.06T21:06:47"
+    };
+
+    then = [{
+      cid: "29",
+      event: "Placed",
+      user: "gudni",
+      symbol: "X",
+      row: 0,
+      column: 2,
+      time: "2015.12.06T21:06:47"
+    }, {
+      cid: "29",
+      event: "Victory",
+      user: "gudni",
+      symbol: "X"
+    }];
+
+    var result = tictactoeCommandHandler(given).executeCommand(when);
+
+    JSON.stringify(result).should.be.exactly(JSON.stringify(then));
+  });
+
+
 });
