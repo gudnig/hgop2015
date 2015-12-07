@@ -114,4 +114,53 @@ describe('place command', function() {
     JSON.stringify(result).should.be.exactly(JSON.stringify(then));
 
   });
+
+  it('should reject placement out of bounds', function() {
+    when = {
+      cid: "22",
+      command: "Place",
+      user: "gudni",
+      symbol: "X",
+      row: 0,
+      column: 3,
+      time: "2015.12.06T21:06:33"
+    };
+    then = [{
+      cid: "22",
+      event: "IllegalMove",
+      user: "gudni",
+      symbol: "X",
+      row: 0,
+      column: 3,
+      time: "2015.12.06T21:06:33"
+    }];
+
+    var result = tictactoeCommandHandler(given).executeCommand(when);
+
+    JSON.stringify(result).should.be.exactly(JSON.stringify(then));
+  });
+
+  it('should reject placement out of bounds with negative number', function() {
+    when = {
+      cid: "25",
+      command: "Place",
+      user: "gudni",
+      symbol: "X",
+      row: -1,
+      column: 2,
+      time: "2015.12.06T21:06:47"
+    };
+    then = [{
+      cid: "25",
+      event: "IllegalMove",
+      user: "gudni",
+      symbol: "X",
+      row: -1,
+      column: 2,
+      time: "2015.12.06T21:06:47"
+    }];
+    var result = tictactoeCommandHandler(given).executeCommand(when);
+
+    JSON.stringify(result).should.be.exactly(JSON.stringify(then));
+  });
 });
