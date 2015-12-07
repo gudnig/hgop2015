@@ -10,7 +10,6 @@ module.exports = function tictactoeCommandHandler(events) {
         board[entry.row][entry.column] = entry.symbol;
       }
     });
-    console.log("Board: " + board);
     return {
       legalMove: function(row, column) {
         if(row < 0 || column < 0)
