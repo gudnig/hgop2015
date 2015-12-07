@@ -54,7 +54,8 @@ module.exports = function tictactoeCommandHandler(events) {
           cid: command.cid,
           event: "Victory",
           user: command.user,
-          symbol: command.symbol
+          symbol: command.symbol,
+          time: command.time
         })
       }
 
