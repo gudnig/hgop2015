@@ -13,6 +13,8 @@ module.exports = function tictactoeCommandHandler(events) {
 
     return {
       legalMove: function(row, column) {
+        if(row < 0 || column < 0)
+          return false;
         return board[row][column] === '';
 
       }
