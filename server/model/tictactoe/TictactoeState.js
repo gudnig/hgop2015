@@ -35,6 +35,14 @@ module.exports = function TictactoeState(events) {
           return true;
       }
 
+      // backward slash (diagonal) check
+      for(i = 0; i < 3; i++) {
+        if(board[i][i] !== symbol)
+          break;
+        else if(i === 2)
+          return true;
+      }
+
       return false;
     }
   };
