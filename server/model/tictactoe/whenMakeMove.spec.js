@@ -473,7 +473,7 @@ describe('place command', function() {
     }, {
       cid: "17",
       event: "Draw",
-      time: "2015.12.06T21:07:48"
+      time: "2015.12.06T21:05:15"
     }];
 
     var result = tictactoeCommandHandler(given).executeCommand(when);
