@@ -3,6 +3,7 @@ module.exports = function tictactoeCommandHandler(events) {
 
   function TictactoeState(events) {
     var board = [['', '', ''], ['', '', ''], ['', '', ''] ];
+    var i;
 
     // Build board state from events
     events.forEach(function(entry) {
@@ -23,14 +24,20 @@ module.exports = function tictactoeCommandHandler(events) {
         board[row][col] = symbol;
 
         // Row check
-        for( var i = 0; i < 3; i++) {
-          if(board[row][i] !== symbol) {
+        for(i = 0; i < 3; i++) {
+          if(board[row][i] !== symbol)
             break;
-          }
-          else if(i === 2) {
+          else if(i === 2)
             return true;
-          }
         }
+        // Column check
+        for(i = 0; i < 3; i++) {
+          if(board[i][col] !== symbol)
+            break;
+          else if(i === 2)
+            return true;
+        }
+
         return false;
       }
     };
