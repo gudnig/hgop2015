@@ -266,5 +266,55 @@ describe('place command', function() {
     JSON.stringify(result).should.be.exactly(JSON.stringify(then));
   });
 
+  it('should return win event on same symbol in a backward slash', function() {
+
+    given.push({
+      cid: "166",
+      event: "Placed",
+      user:"gretar",
+      symbol: "O",
+      row: 1,
+      column: 1,
+      time: "2015.12.06T21:06:15"
+    });
+    given.push({
+      cid: "167",
+      event: "Placed",
+      user:"gretar",
+      symbol: "O",
+      row: 2,
+      column: 2,
+      time: "2015.12.06T21:06:22"
+    });
+
+    when = {
+      cid: "168",
+      command: "Place",
+      user: "gretar",
+      symbol: "O",
+      row: 0,
+      column: 0,
+      time: "2015.12.06T21:06:49"
+    };
+
+    then = [{
+      cid: "30",
+      event: "Placed",
+      user: "gretar",
+      symbol: "O",
+      row: 0,
+      column: 0,
+      time: "2015.12.06T21:06:49"
+    }, {
+      cid: "30",
+      event: "Victory",
+      user: "gretar",
+      symbol: "O"
+    }];
+
+    var result = tictactoeCommandHandler(given).executeCommand(when);
+
+    JSON.stringify(result).should.be.exactly(JSON.stringify(then));
+  });
 
 });
