@@ -56,7 +56,14 @@ module.exports = function tictactoeCommandHandler(events) {
           user: command.user,
           symbol: command.symbol,
           time: command.time
-        })
+        });
+      }
+      else if(gameState.boardFull()) {
+        result.push({
+          cid: command.cid,
+          event: "Draw",
+          time: command.time
+        });
       }
 
       return result;
