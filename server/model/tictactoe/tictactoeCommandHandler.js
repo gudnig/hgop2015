@@ -10,13 +10,29 @@ module.exports = function tictactoeCommandHandler(events) {
         board[entry.row][entry.column] = entry.symbol;
       }
     });
-
+    console.log("Board: " + board);
     return {
       legalMove: function(row, column) {
         if(row < 0 || column < 0)
           return false;
         return board[row][column] === '';
+      },
+      checkVictory: function(symbol, row, col) {
+        // Checks if given symbol has achieved victory
 
+        // First add new move to the board
+        board[row][col] = symbol;
+
+        // Row check
+        for( var i = 0; i < 3; i++) {
+          if(board[row][i] !== symbol) {
+            break;
+          }
+          else if(i === 2) {
+            return true;
+          }
+        }
+        return false;
       }
     };
   }
@@ -54,29 +70,33 @@ module.exports = function tictactoeCommandHandler(events) {
     },
     "Place": function(command) {
       var commandEvent = "Placed";
-      if(!gameState.legalMove(command.row, command.column)) {
+      var legalMove = gameState.legalMove(command.row, command.column);
+      if(!legalMove) {
         commandEvent = "IllegalMove";
-        return [{
-          cid: command.cid,
-          event: commandEvent,
-          user: command.user,
-          symbol: command.symbol,
-          row: command.row,
-          column: command.column,
-          time: command.time
-        }];
       }
 
-      return [{
+      var result =  [{
         cid: command.cid,
-        event: "Placed",
+        event: commandEvent,
         user: command.user,
         symbol: command.symbol,
         row: command.row,
         column: command.column,
         time: command.time
-      }]
+      }];
+
+      if(legalMove && gameState.checkVictory(command.symbol, command.row, command.column)) {
+        result.push({
+          cid: command.cid,
+          event: "Victory",
+          user: command.user,
+          symbol: command.symbol
+        })
+      }
+
+      return result;
     }
+
   };
 
   return {
