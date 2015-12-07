@@ -266,7 +266,7 @@ describe('place command', function() {
     JSON.stringify(result).should.be.exactly(JSON.stringify(then));
   });
 
-  it('should return win event on same symbol in a backward slash', function() {
+  it('should return win event on same symbol in a diagonal backward slash', function() {
 
     given.push({
       cid: "166",
@@ -310,6 +310,57 @@ describe('place command', function() {
       event: "Victory",
       user: "gretar",
       symbol: "O"
+    }];
+
+    var result = tictactoeCommandHandler(given).executeCommand(when);
+
+    JSON.stringify(result).should.be.exactly(JSON.stringify(then));
+  });
+
+  it('should return win event on same symbol in a diagonal forward slash', function() {
+
+    given.push({
+      cid: "29",
+      event: "Placed",
+      user:"gudni",
+      symbol: "X",
+      row: 1,
+      column: 1,
+      time: "2015.12.06T21:07:01"
+    });
+    given.push({
+      cid: "30",
+      event: "Placed",
+      user:"gudni",
+      symbol: "X",
+      row: 0,
+      column: 2,
+      time: "2015.12.06T21:07:38"
+    });
+
+    when = {
+      cid: "31",
+      command: "Place",
+      user: "gudni",
+      symbol: "X",
+      row: 2,
+      column: 0,
+      time: "2015.12.06T21:07:48"
+    };
+
+    then = [{
+      cid: "31",
+      event: "Placed",
+      user: "gudni",
+      symbol: "X",
+      row: 2,
+      column: 0,
+      time: "2015.12.06T21:07:48"
+    }, {
+      cid: "31",
+      event: "Victory",
+      user: "gudni",
+      symbol: "X"
     }];
 
     var result = tictactoeCommandHandler(given).executeCommand(when);
