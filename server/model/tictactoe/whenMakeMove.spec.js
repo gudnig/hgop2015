@@ -207,7 +207,8 @@ describe('place command', function() {
       cid: "30",
       event: "Victory",
       user: "gudni",
-      symbol: "X"
+      symbol: "X",
+      time: "2015.12.06T21:06:47"
     }];
 
     var result = tictactoeCommandHandler(given).executeCommand(when);
@@ -258,7 +259,8 @@ describe('place command', function() {
       cid: "30",
       event: "Victory",
       user: "gudni",
-      symbol: "X"
+      symbol: "X",
+      time: "2015.12.06T21:06:33"
     }];
 
     var result = tictactoeCommandHandler(given).executeCommand(when);
@@ -309,7 +311,8 @@ describe('place command', function() {
       cid: "168",
       event: "Victory",
       user: "gretar",
-      symbol: "O"
+      symbol: "O",
+      time: "2015.12.06T21:06:49"
     }];
 
     var result = tictactoeCommandHandler(given).executeCommand(when);
@@ -360,7 +363,8 @@ describe('place command', function() {
       cid: "31",
       event: "Victory",
       user: "gudni",
-      symbol: "X"
+      symbol: "X",
+      time: "2015.12.06T21:07:48"
     }];
 
     var result = tictactoeCommandHandler(given).executeCommand(when);
