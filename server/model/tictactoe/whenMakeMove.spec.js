@@ -251,8 +251,8 @@ describe('place command', function() {
       event: "Placed",
       user: "gudni",
       symbol: "X",
-      row: 1,
-      column: 2,
+      row: 2,
+      column: 1,
       time: "2015.12.06T21:06:33"
     }, {
       cid: "30",
