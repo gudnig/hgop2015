@@ -35,15 +35,7 @@ When [Place(0,3,X)]
 Then []
 
 Given []
-When [Place(3,0,X)]
-Then []
-
-Given []
 When [Place(-1,2,X)]
-Then []
-
-Given []
-When [Place(0,-3,X)]
 Then []
 
 Win scenarios
