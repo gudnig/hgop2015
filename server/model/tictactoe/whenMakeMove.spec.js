@@ -298,7 +298,7 @@ describe('place command', function() {
     };
 
     then = [{
-      cid: "30",
+      cid: "168",
       event: "Placed",
       user: "gretar",
       symbol: "O",
@@ -306,7 +306,7 @@ describe('place command', function() {
       column: 0,
       time: "2015.12.06T21:06:49"
     }, {
-      cid: "30",
+      cid: "168",
       event: "Victory",
       user: "gretar",
       symbol: "O"
