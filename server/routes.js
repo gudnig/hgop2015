@@ -8,7 +8,9 @@ var errors = require('./components/errors');
 
 module.exports = function(app, config) {
 
-  var config = require('./config/environment');
+  if(config === undefined) {
+    config = require('./config/environment');
+  }
   var eventStore = require('.' + config.eventstore)();
 
   // Insert routes below
