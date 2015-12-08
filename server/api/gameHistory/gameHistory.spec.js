@@ -9,8 +9,8 @@ describe('GET /api/gameHistory', function () {
   it('should respond with JSON array with created events for game', function (done) {
     var command =     {
       cid : "1234",
-      gid : "999",
-      gameId: "CreateGame",
+      gameId : "999",
+      command: "CreateGame",
       user: "Gulli",
       name: "TheFirstGame",
       time: "2014-12-02T11:29:29"
