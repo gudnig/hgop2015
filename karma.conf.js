@@ -7,7 +7,7 @@ module.exports = function(config) {
     basePath: '',
 
     // testing framework to use (jasmine/mocha/qunit/...)
-    frameworks: ['jasmine'],
+    frameworks: ['jasmine', 'requirejs'],
 
     // list of files / patterns to load in the browser
     files: [
@@ -61,6 +61,15 @@ module.exports = function(config) {
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: false,
 
+    reporters: ['progress', 'junit'],
+
+    junitReporter: {
+      outputDir: 'junit-tests', // results will be saved as $outputDir/$browserName.xml
+      outputFile: "test-results.xml", // if included, results will be saved as $outputDir/$browserName/$outputFile
+      suite: '', // suite will become the package name attribute in xml testsuite element
+      useBrowserName: false // add browser name to report and classes names
+    },
+
 
     // Start these browsers, currently available:
     // - Chrome
@@ -75,15 +84,7 @@ module.exports = function(config) {
 
     // Continuous Integration mode
     // if true, it capture browsers, run tests and exit
-    singleRun: false,
-    reporters: ['progress', 'junit'],
+    singleRun: false
 
-    // the default configuration
-    junitReporter: {
-      outputDir: '', // results will be saved as $outputDir/$browserName.xml
-      outputFile: 'test-results.xml', // if included, results will be saved as $outputDir/$browserName/$outputFile
-      suite: '', // suite will become the package name attribute in xml testsuite element
-      useBrowserName: true // add browser name to report and classes names
-    }
   });
 };
