@@ -5,12 +5,14 @@ describe('place command', function() {
   beforeEach(function() {
     given = [{
       cid: "12",
+      gameId: "3",
       event: "GameCreated",
       user: "gudni",
       name: "gudni's game",
       time: "2015.12.06T21:00:01"
     }, {
       cid: "144",
+      gameId: "3",
       event: "GameJoined",
       user: "gretar",
       name: "gudni's game",
@@ -22,6 +24,7 @@ describe('place command', function() {
   it('should place symbol on empty board', function() {
     when = {
       cid: "13",
+      gameId: "3",
       command: "Place",
       user: "gudni",
       symbol: "X",
@@ -31,6 +34,7 @@ describe('place command', function() {
     };
     then = [{
       cid: "13",
+      gameId: "3",
       event: "Placed",
       user: "gudni",
       symbol: "X",
@@ -46,6 +50,7 @@ describe('place command', function() {
   it('should place symbol on empty slot on non-empty board', function() {
     given.push({
       cid: "15",
+      gameId: "3",
       event: "Placed",
       user:"gudni",
       symbol: "X",
@@ -55,6 +60,7 @@ describe('place command', function() {
     });
     when = {
       cid: "147",
+      gameId: "3",
       command: "Place",
       user: "gretar",
       symbol: "O",
@@ -65,6 +71,7 @@ describe('place command', function() {
 
     then = [{
       cid: "147",
+      gameId: "3",
       event: "Placed",
       user: "gretar",
       symbol: "O",
@@ -82,6 +89,7 @@ describe('place command', function() {
   it('should reject placement on occupied square', function() {
     given.push({
       cid: "19",
+      gameId: "3",
       event: "Placed",
       user:"gudni",
       symbol: "X",
@@ -91,6 +99,7 @@ describe('place command', function() {
     });
     when = {
       cid: "166",
+      gameId: "3",
       command: "Place",
       user: "gretar",
       symbol: "O",
@@ -101,6 +110,7 @@ describe('place command', function() {
 
     then = [{
       cid: "166",
+      gameId: "3",
       event: "IllegalMove",
       user: "gretar",
       symbol: "O",
@@ -118,6 +128,7 @@ describe('place command', function() {
   it('should reject placement out of bounds', function() {
     when = {
       cid: "22",
+      gameId: "3",
       command: "Place",
       user: "gudni",
       symbol: "X",
@@ -127,6 +138,7 @@ describe('place command', function() {
     };
     then = [{
       cid: "22",
+      gameId: "3",
       event: "IllegalMove",
       user: "gudni",
       symbol: "X",
@@ -143,6 +155,7 @@ describe('place command', function() {
   it('should reject placement out of bounds with negative number', function() {
     when = {
       cid: "25",
+      gameId: "3",
       command: "Place",
       user: "gudni",
       symbol: "X",
@@ -152,6 +165,7 @@ describe('place command', function() {
     };
     then = [{
       cid: "25",
+      gameId: "3",
       event: "IllegalMove",
       user: "gudni",
       symbol: "X",
@@ -168,6 +182,7 @@ describe('place command', function() {
 
     given.push({
       cid: "28",
+      gameId: "3",
       event: "Placed",
       user:"gudni",
       symbol: "X",
@@ -177,6 +192,7 @@ describe('place command', function() {
     });
     given.push({
       cid: "29",
+      gameId: "3",
       event: "Placed",
       user:"gudni",
       symbol: "X",
@@ -187,6 +203,7 @@ describe('place command', function() {
 
     when = {
       cid: "30",
+      gameId: "3",
       command: "Place",
       user: "gudni",
       symbol: "X",
@@ -197,6 +214,7 @@ describe('place command', function() {
 
     then = [{
       cid: "30",
+      gameId: "3",
       event: "Placed",
       user: "gudni",
       symbol: "X",
@@ -205,6 +223,7 @@ describe('place command', function() {
       time: "2015.12.06T21:06:47"
     }, {
       cid: "30",
+      gameId: "3",
       event: "Victory",
       user: "gudni",
       symbol: "X",
@@ -220,6 +239,7 @@ describe('place command', function() {
 
     given.push({
       cid: "28",
+      gameId: "3",
       event: "Placed",
       user:"gudni",
       symbol: "X",
@@ -229,6 +249,7 @@ describe('place command', function() {
     });
     given.push({
       cid: "29",
+      gameId: "3",
       event: "Placed",
       user:"gudni",
       symbol: "X",
@@ -239,6 +260,7 @@ describe('place command', function() {
 
     when = {
       cid: "30",
+      gameId: "3",
       command: "Place",
       user: "gudni",
       symbol: "X",
@@ -249,6 +271,7 @@ describe('place command', function() {
 
     then = [{
       cid: "30",
+      gameId: "3",
       event: "Placed",
       user: "gudni",
       symbol: "X",
@@ -257,6 +280,7 @@ describe('place command', function() {
       time: "2015.12.06T21:06:33"
     }, {
       cid: "30",
+      gameId: "3",
       event: "Victory",
       user: "gudni",
       symbol: "X",
@@ -272,6 +296,7 @@ describe('place command', function() {
 
     given.push({
       cid: "166",
+      gameId: "3",
       event: "Placed",
       user:"gretar",
       symbol: "O",
@@ -281,6 +306,7 @@ describe('place command', function() {
     });
     given.push({
       cid: "167",
+      gameId: "3",
       event: "Placed",
       user:"gretar",
       symbol: "O",
@@ -291,6 +317,7 @@ describe('place command', function() {
 
     when = {
       cid: "168",
+      gameId: "3",
       command: "Place",
       user: "gretar",
       symbol: "O",
@@ -301,6 +328,7 @@ describe('place command', function() {
 
     then = [{
       cid: "168",
+      gameId: "3",
       event: "Placed",
       user: "gretar",
       symbol: "O",
@@ -309,6 +337,7 @@ describe('place command', function() {
       time: "2015.12.06T21:06:49"
     }, {
       cid: "168",
+      gameId: "3",
       event: "Victory",
       user: "gretar",
       symbol: "O",
@@ -324,6 +353,7 @@ describe('place command', function() {
 
     given.push({
       cid: "29",
+      gameId: "3",
       event: "Placed",
       user:"gudni",
       symbol: "X",
@@ -333,6 +363,7 @@ describe('place command', function() {
     });
     given.push({
       cid: "30",
+      gameId: "3",
       event: "Placed",
       user:"gudni",
       symbol: "X",
@@ -343,6 +374,7 @@ describe('place command', function() {
 
     when = {
       cid: "31",
+      gameId: "3",
       command: "Place",
       user: "gudni",
       symbol: "X",
@@ -353,6 +385,7 @@ describe('place command', function() {
 
     then = [{
       cid: "31",
+      gameId: "3",
       event: "Placed",
       user: "gudni",
       symbol: "X",
@@ -361,6 +394,7 @@ describe('place command', function() {
       time: "2015.12.06T21:07:48"
     }, {
       cid: "31",
+      gameId: "3",
       event: "Victory",
       user: "gudni",
       symbol: "X",
@@ -372,15 +406,17 @@ describe('place command', function() {
     JSON.stringify(result).should.be.exactly(JSON.stringify(then));
   });
 
-  it('draw when the board is full and no victory has been achieved', function() {
+  it('should draw when the board is full and no victory has been achieved', function() {
     given = [{
       cid: "12",
+      gameId: "3",
       event: "GameCreated",
       user: "gudni",
       name: "gudni's game",
       time: "2015.12.06T21:00:01"
     }, {
       cid: "144",
+      gameId: "3",
       event: "GameJoined",
       user: "gretar",
       name: "gudni's game",
@@ -388,6 +424,7 @@ describe('place command', function() {
       time:"2015.12.06T21:03:02"
     }, {
       cid: "13",
+      gameId: "3",
       event: "Placed",
       user:"gudni",
       symbol: "X",
@@ -396,6 +433,7 @@ describe('place command', function() {
       time: "2015.12.06T21:03:17"
     }, {
       cid: "145",
+      gameId: "3",
       event: "Placed",
       user:"gretar",
       symbol: "O",
@@ -404,6 +442,7 @@ describe('place command', function() {
       time: "2015.12.06T21:03:32"
     }, {
       cid: "14",
+      gameId: "3",
       event: "Placed",
       user:"gudni",
       symbol: "X",
@@ -412,6 +451,7 @@ describe('place command', function() {
       time: "2015.12.06T21:03:47"
     }, {
       cid: "146",
+      gameId: "3",
       event: "Placed",
       user:"gretar",
       symbol: "O",
@@ -420,6 +460,7 @@ describe('place command', function() {
       time: "2015.12.06T21:04:00"
     }, {
       cid: "15",
+      gameId: "3",
       event: "Placed",
       user:"gudni",
       symbol: "X",
@@ -428,6 +469,7 @@ describe('place command', function() {
       time: "2015.12.06T21:04:15"
     }, {
       cid: "147",
+      gameId: "3",
       event: "Placed",
       user:"gretar",
       symbol: "O",
@@ -436,6 +478,7 @@ describe('place command', function() {
       time: "2015.12.06T21:04:30"
     }, {
       cid: "16",
+      gameId: "3",
       event: "Placed",
       user:"gudni",
       symbol: "X",
@@ -444,6 +487,7 @@ describe('place command', function() {
       time: "2015.12.06T21:04:45"
     }, {
       cid: "148",
+      gameId: "3",
       event: "Placed",
       user:"gretar",
       symbol: "O",
@@ -454,6 +498,7 @@ describe('place command', function() {
 
     when = {
       cid: "17",
+      gameId: "3",
       command: "Place",
       user: "gudni",
       symbol: "X",
@@ -464,6 +509,7 @@ describe('place command', function() {
 
     then = [{
       cid: "17",
+      gameId: "3",
       event: "Placed",
       user: "gudni",
       symbol: "X",
@@ -472,6 +518,7 @@ describe('place command', function() {
       time: "2015.12.06T21:05:15"
     }, {
       cid: "17",
+      gameId: "3",
       event: "Draw",
       time: "2015.12.06T21:05:15"
     }];

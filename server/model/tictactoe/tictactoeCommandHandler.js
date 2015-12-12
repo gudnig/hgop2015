@@ -18,6 +18,7 @@ module.exports = function tictactoeCommandHandler(events) {
       if(gameCreatedEvent === undefined) {
         return [{
           cid: command.cid,
+          gameId: command.gameId,
           event: "NoSuchGame",
           user: command.user,
           name: command.name,
@@ -26,6 +27,7 @@ module.exports = function tictactoeCommandHandler(events) {
       }
       return [{
         cid: command.cid,
+        gameId: command.gameId,
         event: "GameJoined",
         user: command.user,
         name: command.name,
@@ -42,6 +44,7 @@ module.exports = function tictactoeCommandHandler(events) {
 
       var result =  [{
         cid: command.cid,
+        gameId: command.gameId,
         event: commandEvent,
         user: command.user,
         symbol: command.symbol,
@@ -53,6 +56,7 @@ module.exports = function tictactoeCommandHandler(events) {
       if(legalMove && gameState.checkVictory(command.symbol, command.row, command.column)) {
         result.push({
           cid: command.cid,
+          gameId: command.gameId,
           event: "Victory",
           user: command.user,
           symbol: command.symbol,
@@ -62,6 +66,7 @@ module.exports = function tictactoeCommandHandler(events) {
       else if(gameState.boardFull()) {
         result.push({
           cid: command.cid,
+          gameId: command.gameId,
           event: "Draw",
           time: command.time
         });
