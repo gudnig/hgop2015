@@ -38,12 +38,12 @@ describe('TEST ENV GET /api/gameHistory', function () {
             res.body.should.be.instanceof(Array);
             should(res.body).eql(
               [{
-                "id": "1234",
+                "cid": "1234",
                 "gameId": "999",
                 "event": "GameCreated",
-                "userName": "Gulli",
+                "user": "Gulli",
                 "name": "TheFirstGame",
-                "timeStamp": "2014-12-02T11:29:29"
+                "time": "2014-12-02T11:29:29"
               }]);
             done();
           });
