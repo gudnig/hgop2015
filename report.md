@@ -14,3 +14,9 @@ Bower er svipað tól og NPM, pakkaumsjónarkerfi fyrir javascript libraries. Yf
 
 ##Umhverfi og CI pípan:
 2 virtual vélar sjá um að halda uppi allri pípunni. Önnur er dev vélin sem keyrir líka jenkins þjóninn. Hin er production-like test umhverfið sem er líka load test umhverfið. Þegar breytingum er ýtt inn á github þá sækir jenkins þjónninn breytingarnar,keyrir einingapróf, setur upp libraries með npm install og keyrir scriptu sem heitir dockerbuild.sh. Hún byggir kerfið með grunt og pakkar því saman í docker image. Til að deploya kerfinu þá er notuð scriptan deploy.sh sem ýtir docker image út á netið, tengir sig svo inn á prod-like test umhverfið og sækir docker imaginn og keyrir hana upp í staðinn fyrir eldri útgáfu. Að lokum keyrir jenkins svo acceptance próf á móti prod-like test umhverfinu.
+
+##Capacity tests
+Ég byrjaði á að keyra 1000 leiki þangað til jafntefli varð. Það komu undarlegar niðurstöður úr því þar sem aldrei kom timeout og miklu fleiri próf voru keyrð en beðið var um, hátt í 6000. Það komu í ljós villur í fluidApi sem ég lagaði. Síðan lækkaði ég prófin niður í 10 og síðan 100 þar sem keyrslan var eðlileg og tíminn var yfirleitt í kring um 7-8 sek á 100 leikjum. Ég stillti því timeout í 9 sek.
+
+##Paralell eða serial
+Nodejs er með asynchronus IO sem þýðir að það bíður ekki eftir að fallið klárar heldur heldur áfram og notar callback functions til að skila gögnum til baka. Það þýðir að á meðan eitt fall keyrir þá er hægt að byrja á næsta. Þannig að prófin eru keyrð samhliða.
