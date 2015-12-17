@@ -1,5 +1,6 @@
 #!/bin/bash
-set -e
+set -e - pipefail
+
 docker kill yoserver
 docker rm yoserver
 docker pull gudnig/tictactoe
