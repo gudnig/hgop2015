@@ -16,7 +16,7 @@ function postCommands(commands, done) {
       .post(command.uri)
       .type('json')
       .send(command)
-      .end(function (err, res) {
+      .end(function (err) {
         if(err) { return done(err); }
       });
     postCommands(commands, done);
@@ -53,8 +53,7 @@ var user = function(name) {
     },
     places: function(row, column, symbol) {
       cidCount++;
-        command.cid = cidCount.toString();
-      command.gameId = "3";
+      command.cid = cidCount.toString();
       command.command = "Place";
       command.user = name;
       command.symbol = symbol;
@@ -62,7 +61,7 @@ var user = function(name) {
       command.column = column;
       command.time = "2015.12.12T15:15:15";
       command.uri = "/api/placeMove";
-
+      return commandAPI;
     },
     action: function() {
       return command;
@@ -85,6 +84,9 @@ function given(command) {
 
   var givenAPI = {
     and: function(command) {
+      if(command.gameId === undefined) {
+        command.gameId = currGameId;
+      }
       expectedEvent.cid = command.cid;
       expectedEvent.time = command.time;
       commands.push(command);
@@ -159,7 +161,7 @@ describe('TEST ENV GET /api/gameHistory', function () {
       .post('/api/createGame')
       .type('json')
       .send(command)
-      .end(function (err, res) {
+      .end(function (err) {
         if (err) return done(err);
         request(acceptanceUrl)
           .get('/api/gameHistory/999')
@@ -183,11 +185,20 @@ describe('TEST ENV GET /api/gameHistory', function () {
   });
 
 
-   it('Should execute fluid API test', function (done) {
+   it('Should play until draw', function (done) {
 
      given(user("Gudni").createsGame("13").withName("myGame").action())
        .and(user("Garri").joinsGame("13").withName("myGame").action())
-     .expect("GameJoined").byUser("Garri").withId("13").withName("myGame").hostedByUser("Gudni").isOk(done);
+       .and(user("Gudni").places(1,1,"X").action())
+       .and(user("Garri").places(0,0,"O").action())
+       .and(user("Gudni").places(2,0,"X").action())
+       .and(user("Garri").places(0,2,"O").action())
+       .and(user("Gudni").places(0,1,"X").action())
+       .and(user("Garri").places(2,1,"O").action())
+       .and(user("Gudni").places(1,2,"X").action())
+       .and(user("Garri").places(1,0,"O").action())
+       .and(user("Gudni").places(2,2,"X").action())
+       .expect("Draw").withId("13").isOk(done);
 
    });
 
