@@ -1,15 +1,16 @@
-Vagrant is a tool to ease the process of virtualization and reduces setup time. For instance developers need certain tools to develop in a certain environment. Designers need other tools. Setting up a new developer takes time. The machine needs to be configured and the right software installed. Vagrant simplifies this as you can use one vagrant file to set up everyone, which saves configuration time and gives you uniform dev environments.
+Vagrant er tól til að auðvelda manni að setja upp sýndarveĺar. Það er hægt að setja upp forstilltar sýndarvélar úr skrám. Mismunandi aðstæður kalla á mismunandi sýndarvélar en sýndarvélar sem eru settar upp úr sömu skrá verða eins. Þá er auðvelt að endurskapa sama umhverfi. Það t.d. sparar tíma við uppsetningu ef bara þarf að setja upp einu sinni og það er hægt að vera með nákvæmlega eins þróunarumhverfi fyrir alla í þróunarteyminu.
 
-VirtualBox is software that allows you to run multiple operating systems. It does this by allowing you to run virtual machines inside your operating system which simulate a computer running another operating system.
+VirtualBox er hugbúnaður sem leyfir manni að keyra sýndarvélar. Það er að segja leyfir manni að keyra upp stýrikerfi inn í öðru stýrikerfi með því að líkja við (simulate) tölvu sem keyrir ákveðið stýrikerfi. 
 
-Grunt is a tool that runs tasks. The reason for it is to automate your development process. In the course of testing, deploying or development in general you may need to run many scripts and tasks. Grunt automates this process for you. For instance a grunt deploy task might run all your tests automatically and if they are successful grunt might then uglify and minify the code you are deploying and push it to a server. This can all be accomplished with one command through one grunt task.
-
-Nodejs is a javascript framework and run time environment for building web applications. It is event driven rather than thread based. And it is easy to set up and run simple applications and they can be scaled without much difficulty.
-
-NPM (Node package manager) is a package manager (obviously) for Nodejs. At least that is what it started out as. It has since branched out and offers a variety of packes. Although a lot of the packages available are for originally for the Nodejs runtime there are lots of frontend packages now. It has a big repository of packages, it is easy for developers to publish their own packages and easy to get packages via the NPM client.
-
-Bower is another package manager which depends on nodejs and npm. While npm has all sort of packages for development, including for tools used in development bower is mostly used to control packages for the application being developed. Packages being used in the development are tracked as a json object in the bower.json file which can be used to synchronize between computers and developers what packages are being used.
+Grunt er tól sem keyrir verkefni. Ástæðan fyrir því er að sjálfvirknivæða þróunarferlið þitt. Í þróun eru allskonar verkefni sem þarf að gera. Til að deploya þá þarf kannski að uglify-a og minify-a. Grunt gerir það auðvelt að safna saman verkefnum og keyra með einni skipun.
 
 
+Nodejs er javascript framework og keyrsluumhverfi til að búa til vefforrit. Keyrsluumhverfið keyrir bara á einum þræði asynchronously frekar en að multithreada og notar eventa í staðinn. Það er tiltölulega auðvelt að búa til og keyra upp einfalt forrit og auðvelt að skala það upp líka.
+
+NPM (Node package manager) er pakkaumsjónarkerfi, upphaflega fyrir Nodejs en er búið að færa út kvíarnar í dag. Þetta er tæki til að halda utan um pakka sem eru yfirleitt libraries frá þriðja aðila. Þetta hjálpar við að halda öllum pökkum eins þegar við erum að þróa og gefa út hugbúnað því pakkarnir og útgáfunúmer eru geymdir í sameiginlegri skrá.
+
+Bower er svipað tól og NPM, pakkaumsjónarkerfi fyrir javascript libraries. Yfirleitt notað fyrir framendann og ekki eins mikið af þróunartólum og í npm. Sömu kostir, auðveldara að tryggja sér að allir séu að nota sömu libraries.
 
 
+##Umhverfi og CI pípan:
+2 virtual vélar sjá um að halda uppi allri pípunni. Önnur er dev vélin sem keyrir líka jenkins þjóninn. Hin er production-like test umhverfið sem er líka load test umhverfið. Þegar breytingum er ýtt inn á github þá sækir jenkins þjónninn breytingarnar,keyrir einingapróf, setur upp libraries með npm install og keyrir scriptu sem heitir dockerbuild.sh. Hún byggir kerfið með grunt og pakkar því saman í docker image. Til að deploya kerfinu þá er notuð scriptan deploy.sh sem ýtir docker image út á netið, tengir sig svo inn á prod-like test umhverfið og sækir docker imaginn og keyrir hana upp í staðinn fyrir eldri útgáfu. Að lokum keyrir jenkins svo acceptance próf á móti prod-like test umhverfinu.
