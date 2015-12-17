@@ -2,7 +2,7 @@ var should = require('should');
 var request = require('supertest');
 var acceptanceUrl = process.env.ACCEPTANCE_URL;
 
-function postCommands(commands, done) {
+function postCommands(commands, expectedEvent, done, gameId) {
   var command;
   var req = request(acceptanceUrl);
   if(commands.length > 0)
@@ -15,8 +15,21 @@ function postCommands(commands, done) {
       .send(command)
       .end(function (err) {
         if(err) { return done(err); }
+        request(acceptanceUrl)
+          .get('/api/gameHistory/' + gameId)
+          .expect(200)
+          .expect('Content-Type', /json/)
+          .end(function (err, res) {
+            if (err) return done(err);
+            if(commands.length > 0) {postCommands(commands, expectedEvent, done, gameId); }
+            else {
+              res.body.should.be.instanceof(Array);
+              should(res.body.pop()).eql(expectedEvent);
+              done();
+            }
+          });
       });
-    postCommands(commands, done);
+
 
   }
 }
@@ -75,15 +88,13 @@ function given(command) {
   // the final call should be isOk which checks the validity of the last event
   // against the expected event
   var commands = [];
-  var expectedEvent = { };
+  var expectedEvent = {};
 
   var currGameId;
 
   var givenAPI = {
     and: function(command) {
-      if(command.gameId === undefined) {
-        command.gameId = currGameId;
-      }
+      command.gameId = currGameId;
       expectedEvent.cid = command.cid;
       expectedEvent.time = command.time;
       commands.push(command);
@@ -110,17 +121,8 @@ function given(command) {
           return expectAPI;
         },
         isOk: function(done) {
-          postCommands(commands, done);
-          request(acceptanceUrl)
-            .get('/api/gameHistory/' + currGameId)
-            .expect(200)
-            .expect('Content-Type', /json/)
-            .end(function (err, res) {
-              if (err) return done(err);
-              res.body.should.be.instanceof(Array);
-              should(res.body.pop()).eql(expectedEvent);
-              done();
-            });
+          postCommands(commands, expectedEvent, done, currGameId);
+
         }
       };
       expectedEvent.event = eventName;
