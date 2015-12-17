@@ -131,6 +131,7 @@ module.exports = function (grunt) {
         src: [
           'server/**/*.js',
           '!server/**/*.acceptance.js',
+          '!server/**/*.load.js',
           '!server/**/*.spec.js'
         ]
       },
@@ -138,7 +139,11 @@ module.exports = function (grunt) {
         options: {
           jshintrc: 'server/.jshintrc-spec'
         },
-        src: ['server/**/*.spec.js']
+        src: [
+          'server/**/*.spec.js',
+          'server/**/*.acceptance.js',
+          'server/**/*.load.js'
+        ]
       },
       all: [
         '<%= yeoman.client %>/{app,components}/**/*.js',
@@ -405,10 +410,10 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
-        'less'
+        'less',
       ],
       test: [
-        'less'
+        'less',
       ],
       debug: {
         tasks: [
@@ -435,19 +440,26 @@ module.exports = function (grunt) {
     },
 
     mochaTest: {
-      test:{
+      test: {
         options: {
           reporter: process.env.MOCHA_REPORTER || 'spec',
-          captureFile:'server-tests'
+          captureFile: process.env.MOCHA_REPORT || 'server-tests.txt'
         },
         src: ['server/**/*.spec.js']
       },
       acceptance: {
         options: {
           reporter: process.env.MOCHA_REPORTER || 'spec',
-          captureFile:'acceptance-tests'
+          captureFile: process.env.MOCHA_REPORT || 'acceptance-tests.txt'
         },
         src: ['server/**/*.acceptance.js']
+      },
+      load: {
+        options: {
+          reporter: process.env.MOCHA_REPORTER || 'spec',
+          captureFile: process.env.MOCHA_REPORT || 'load-tests.txt'
+        },
+        src: ['server/**/*.load.js']
       }
     },
     protractor: {
@@ -486,7 +498,7 @@ module.exports = function (grunt) {
         files: {
           '.tmp/app/app.css' : '<%= yeoman.client %>/app/app.less'
         }
-      }
+      },
     },
 
     injector: {
@@ -550,7 +562,7 @@ module.exports = function (grunt) {
           ]
         }
       }
-    }
+    },
   });
 
   // Used for delaying livereload until after server has restarted
