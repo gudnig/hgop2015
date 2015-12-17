@@ -16,9 +16,6 @@ it('Should play 100 games in < 9 seconds.', function (done) {
     if (gamesToPlay === ++doneCount) {
       done();
     }
-    else {
-      console.log(doneCount + "   " + gamesToPlay);
-    }
   };
 
   for (var gameId = 0; gameId < gamesToPlay; gameId++) {
