@@ -1,7 +1,10 @@
 #!/bin/bash
 set -e -o pipefail
+HOST="192.168.33.11"
+if [ -n "$1" ]; then
+  HOST="$1"
+fi
 echo restarting docker image
-ssh vagrant@$1 "docker restart yoserver"
+ssh vagrant@$HOST "docker restart yoserver"
 echo running capacity test
-export ACCEPTANCE_URL=http://$1:$2
 grunt mochaTest:load
