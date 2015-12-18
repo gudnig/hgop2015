@@ -71,8 +71,8 @@ describe('Controller: TictactoeControllerCtrl', function () {
       cid: '1',
       gameId: '87687',
       command: 'Place',
-      user: "Gummi",
-      symbol: "X",
+      user: 'Gummi',
+      symbol: 'X',
       row: 2,
       column: 0,
       time: '2014-12-02T11:29:29'
@@ -81,8 +81,8 @@ describe('Controller: TictactoeControllerCtrl', function () {
         cid: '1',
         gameId: '87687',
         event: 'Placed',
-        user: "Gummi",
-        symbol: "X",
+        user: 'Gummi',
+        symbol: 'X',
         row: 2,
         column: 0,
         time: '2014-12-02T11:29:29'
