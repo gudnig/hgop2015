@@ -96,7 +96,7 @@ describe('Controller: TictactoeControllerCtrl', function () {
     scope.me = 'Gummi';
     scope.gameState.gameId = '87687';
 
-    scope.placeMove({x:2, y:0});
+    scope.placeMove([2, 0]);
     httpBackend.flush();
 
     expect(scope.myTurn()).toBe(false);
@@ -137,7 +137,7 @@ describe('Controller: TictactoeControllerCtrl', function () {
     scope.me = 'Gummi';
     scope.gameState.gameId = '87687';
 
-    scope.placeMove({x:2, y:1});
+    scope.placeMove([2, 1]);
     httpBackend.flush();
     console.log(scope.mySide());
 
