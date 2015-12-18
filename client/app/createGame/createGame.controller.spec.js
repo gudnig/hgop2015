@@ -51,7 +51,7 @@ describe('Controller: CreateGameCtrl', function () {
 
     scope.name = 'TheSecondGame';
 
-    scope.userName = 'Gummi';
+    scope.user = 'Gummi';
 
     scope.createGame();
     httpBackend.flush();
