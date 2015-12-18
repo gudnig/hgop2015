@@ -9,6 +9,8 @@ if [ $old ]; then
   docker rm $old
 fi
 
-
+echo Pulling docker
 docker pull $3:$1
+echo Done pulling now running
 docker run -p $2:8080 -d -e "NODE_ENV=production" --name tictactoe $3:$1
+echo Done running
