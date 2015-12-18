@@ -59,7 +59,7 @@ fi
 
 echo Pushing to docker
 docker push gudnig/tictactoe:$GIT_COMMIT
-
+echo gudnig/tictactoe:$GIT_COMMIT
 rc=$?
 if [[ $rc != 0 ]] ; then
     echo "Docker push failed " $rc
