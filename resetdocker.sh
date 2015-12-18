@@ -1,13 +1,9 @@
 #!/bin/bash
 #pulls new version of container and runs it
 #usage: ./resetdocker.sh version port container
-set -e -o pipefail
 
-old=`docker ps -q`
-if [ $old ]; then
-  docker kill $old
-  docker rm $old
-fi
+docker kill tictactoe
+docker rm tictactoe
 
 echo Pulling docker image
 docker pull $3:$1
