@@ -20,3 +20,14 @@ Bower er svipað tól og NPM, pakkaumsjónarkerfi fyrir javascript libraries. Yf
 
 ##Paralell eða serial
 Nodejs er með asynchronus IO sem þýðir að það bíður ekki eftir að fallið klárar heldur heldur áfram og notar callback functions til að skila gögnum til baka. Það þýðir að á meðan eitt fall keyrir þá er hægt að byrja á næsta. Þannig að prófin eru keyrð samhliða.
+
+##Spurningar dagur 10
+###Hvað gefur þetta okkur? O.s.frm?
+Þetta leyfir okkur að velja hvaða útgáfu við notum. Þeir sem nota hugbúnaðinn okkar geta valið sér útgáfu til að vera vissir um að það sé eins. Við getum líka bakkað í eldri útgáfu í production ef gallar koma í ljós í nýrri útgáfum.
+
+###Hvað er að því að hafa docker push í deployment scriptu?
+Við viljum ekki þurfa að ýta docker image í hvert sinn sem við deployum eitthvert. Þá getur líka allt farið í rugl ef það er búið að builda nýja image þegar við ætlum að deploya, það verður meiri hætta á mistökum. Builda binaries einu sinni og ýta þeim síðan á servera til að testa eða fara í prod.
+
+###Hvernig virkar þetta?
+Þegar þú committar þá býr git til sha1 hash fyrir uppfærsluna úr alls konar upplýsingum, höfundur, parent commit og eitthvað fleira. Þegar við ýtum á docker þá merkjum við docker imaginn með þessu hashi og náum í það með sama merki. Þá getum við valið útgáfu með því að finna sha1 hashið fyrir git commitið.
+
