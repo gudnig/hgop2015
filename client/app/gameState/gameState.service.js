@@ -21,16 +21,16 @@ angular.module('tictactoeApp')
             'GameJoined': function (event, gameState) {
               gameState.joiningUser = event.user;
             },
-            'MovePlaced': function (event, gameState) {
-              var x = event.move.xy.x, y = event.move.xy.y;
-              gameState.board[x][y] = event.move.side;
-              gameState.nextTurn = event.move.side === 'X' ? 'O' : 'X';
+            'Placed': function (event, gameState) {
+              var x = event.row, y = event.column;
+              gameState.board[x][y] = event.symbol;
+              gameState.nextTurn = event.symbol === 'X' ? 'O' : 'X';
             },
-            'GameWon': function (event, gameState) {
+            'Victory': function (event, gameState) {
               gameState.nextTurn = 'GameOver';
-              gameState.winner = event.user;
+              gameState.winner =  { userName: event.user, side: event.symbol };
             },
-            'GameDraw': function (event, gameState) {
+            'Draw': function (event, gameState) {
               gameState.nextTurn = 'GameOver';
               gameState.gameDraw = true;
             }
