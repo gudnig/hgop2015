@@ -39,28 +39,26 @@ describe('Controller: JoinGameCtrl', function () {
       event: 'GameCreated',
       name:'Game Number one',
       gameId : '123',
-      id : '6543'
+      cid : '6543'
     }]);
     httpBackend.expectGET('app/createGame/createGame.html').respond('');
 
     httpBackend.flush();
 
     httpBackend.expectPOST('/api/joinGame/', {
-      id: '1234',
+      cid: '1234',
       gameId: '123',
-      comm: 'JoinGame',
-      user: {
-        userName: 'Gummi',
-        side: 'O'
-      },
-      timeStamp: '2014-12-02T11:29:29'
+      command: 'JoinGame',
+      user: 'Gummi',
+      time: '2014-12-02T11:29:29'
     }).respond([
-        {event: 'GameJoined'}
+        {event: 'GameJoined'
+        }
       ]
     );
 
 
-    scope.userName = 'Gummi';
+    scope.user = 'Gummi';
 
     scope.joinGame();
 
