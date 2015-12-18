@@ -54,8 +54,6 @@ angular.module('tictactoeApp')
       return mySide() === $scope.gameState.nextTurn;
     };
     $scope.placeMove = function (coords) {
-      console.log('X: ' + coords.x + ' Y: ' + coords.y);
-      console.log(coords[0]);
       if(!$scope.myTurn()){
         return;
       }
@@ -71,7 +69,5 @@ angular.module('tictactoeApp')
       };
       thenHandleEvents($http.post('/api/placeMove/', event
       ));
-      console.log($scope.gameState.board);
-      console.log(event)
     };
   });
