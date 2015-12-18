@@ -4,7 +4,7 @@ Nemandi: Guðni Garðarsson 18. desember 2015
 
 ## Tól og tæki
 ### Vagrant
-Vagrant er tól til að auðvelda manni að setja upp sýndarveĺar. Það er hægt að setja upp forstilltar sýndarvélar úr skrám. Mismunandi aðstæður kalla á mismunandi sýndarvélar en sýndarvélar sem eru settar upp úr sömu skrá verða eins. Þá er auðvelt að endurskapa sama umhverfi. Það t.d. sparar tíma við uppsetningu ef bara þarf að setja upp einu sinni og það er hægt að vera með nákvæmlega eins þróunarumhverfi fyrir alla í þróunarteyminu.
+Vagrant er tól til að auðvelda manni að setja upp sýndarvelar. Það er hægt að setja upp forstilltar sýndarvélar úr skrám. Mismunandi aðstæður kalla á mismunandi sýndarvélar en sýndarvélar sem eru settar upp úr sömu skrá verða eins. Þá er auðvelt að endurskapa sama umhverfi. Það t.d. sparar tíma við uppsetningu ef bara þarf að setja upp einu sinni og það er hægt að vera með nákvæmlega eins þróunarumhverfi fyrir alla í þróunarteyminu.
 
 ### VirtualBox
 VirtualBox er hugbúnaður sem leyfir manni að keyra sýndarvélar. Það er að segja leyfir manni að keyra upp stýrikerfi inn í öðru stýrikerfi með því að líkja við (simulate) tölvu sem keyrir ákveðið stýrikerfi. 
