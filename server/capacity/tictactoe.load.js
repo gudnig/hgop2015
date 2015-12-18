@@ -3,11 +3,11 @@ var given = require('../fluid-api/tictactoeFluid').given;
 
 describe('TEST ENV LOAD TEST', function () {
 
-})
+});
 
-it('Should play 100 games in < 9 seconds.', function (done) {
+it('Should play 80 games in < 9 seconds.', function (done) {
   var doneCount = 0;
-  var gamesToPlay = 100;
+  var gamesToPlay = 80;
   var x = 9;
 
   this.timeout(x * 1000);
